@@ -8,9 +8,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            CompaniaSeeder::class,
-            EmpleadoSeeder::class,
-        ]);
+        // Seeders desactivados en producción
+        // Correr manualmente: php artisan db:seed
     }
 }
