@@ -1,10 +1,24 @@
-# API de Companias y Empleados - Parte II
+# API REST de Companias y Empleados
 
-API REST en PHP/Laravel con Onion Architecture, Repository Pattern, Unit of Work, Jobs asincronos, validaciones, pruebas y seguridad JWT por roles y policies.
+API REST construida con Laravel aplicando Onion Architecture, Repository Pattern, Unit of Work, Jobs/Queues, validaciones, pruebas automatizadas y seguridad con JWT, roles y policies.
+
+## Caracteristicas
+
+- CRUD de companias y empleados.
+- Operaciones sobre colecciones: paginacion, filtrado, ordenamiento, bulk insert, PATCH y eliminacion multiple.
+- Procesamiento asincrono con Jobs y Queues de Laravel.
+- Validaciones de entrada con respuestas JSON uniformes.
+- Autenticacion JWT con Bearer Token.
+- Autorizacion por roles (`ADMIN`, `USUARIO`).
+- Autorizacion por policies para reglas de propiedad.
+- Documentacion generada con Scribe.
+- Pruebas con PHPUnit.
 
 ## Arquitectura
 
-```
+El proyecto conserva el flujo por capas:
+
+```text
 Controller / Middleware
         ->
 Application Services + DTOs
@@ -15,12 +29,44 @@ Domain Interfaces
         ->
 Infrastructure Repositories
         ->
-Eloquent ORM / DB
+Eloquent ORM / Database
 ```
 
-Los controladores no acceden directamente a repositorios ni a Eloquent para guardar datos. Las transacciones se controlan desde los servicios mediante `UnitOfWork`.
+Los controladores no ejecutan consultas de negocio directamente contra Eloquent. Las transacciones se coordinan desde los servicios mediante `UnitOfWork`.
 
-## Instalacion y ejecucion
+## Estructura principal
+
+```text
+app/
+  Application/
+    DTOs/
+    Services/
+  Domain/
+    Interfaces/
+  Http/
+    Controllers/
+    Middleware/
+  Infrastructure/
+    Repositories/
+    UnitOfWork/
+  Jobs/
+  Policies/
+database/
+  migrations/
+  seeders/
+routes/
+  api.php
+tests/
+```
+
+## Requisitos
+
+- PHP compatible con la version definida en `composer.json`.
+- Composer.
+- Base de datos soportada por Laravel.
+- Extensiones PHP necesarias para el driver de base de datos usado.
+
+## Instalacion local
 
 ```bash
 composer install
@@ -30,44 +76,66 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-Worker para Jobs asincronos:
+Para ejecutar el worker de colas:
 
 ```bash
 php artisan queue:work --queue=companias,empleados,default --tries=3
 ```
 
-Documentacion Scribe:
+## Variables de entorno
+
+Configura las variables sensibles solo en `.env` o en el panel del proveedor de despliegue. No las publiques en el repositorio.
+
+Variables relevantes:
+
+```env
+APP_URL=
+JWT_SECRET=
+QUEUE_CONNECTION=database
+DB_CONNECTION=
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+SCRIBE_BASE_URL=
+```
+
+Buenas practicas:
+
+- Usa una clave larga y privada para `JWT_SECRET`.
+- No subas archivos `.env`.
+- En produccion, define `APP_URL` y `SCRIBE_BASE_URL` con la URL publica de la API.
+- Usa credenciales diferentes para desarrollo, pruebas y produccion.
+
+## Documentacion API
+
+La documentacion se genera con Scribe:
 
 ```bash
 php artisan scribe:generate
 ```
 
-Abrir:
+Ruta:
 
 ```text
-http://127.0.0.1:8000/docs
+/docs
 ```
 
-## Variables de entorno
+Tambien se generan:
 
-```env
-APP_URL=http://127.0.0.1:8000
-JWT_SECRET=clave_larga_para_firmar_tokens
-QUEUE_CONNECTION=database
+```text
+/docs.openapi
+/docs.postman
 ```
 
-Si `JWT_SECRET` queda vacio, el sistema usa `APP_KEY` como respaldo.
+Para probar endpoints protegidos desde la documentacion, primero inicia sesion en `/api/auth/login`, copia el token y usa:
 
-## Usuarios de prueba
+```http
+Authorization: Bearer <TOKEN>
+```
 
-Despues de `php artisan migrate --seed`:
-
-| Rol | Email | Password |
-|---|---|---|
-| ADMIN | `admin@api.com` | `Admin123` |
-| USUARIO | `usuario@api.com` | `Usuario123` |
-
-## Seguridad JWT
+## Autenticacion
 
 ### Registro
 
@@ -75,11 +143,13 @@ Despues de `php artisan migrate --seed`:
 POST /api/auth/registro
 ```
 
+Body:
+
 ```json
 {
-  "name": "Usuario Dos",
-  "email": "usuario2@api.com",
-  "password": "Usuario123",
+  "name": "Nombre del usuario",
+  "email": "usuario@example.com",
+  "password": "contrasena-segura",
   "role": "USUARIO",
   "compania_id": 1
 }
@@ -91,36 +161,87 @@ POST /api/auth/registro
 POST /api/auth/login
 ```
 
+Body:
+
 ```json
 {
-  "email": "admin@api.com",
-  "password": "Admin123"
+  "email": "usuario@example.com",
+  "password": "contrasena-segura"
 }
 ```
 
-La respuesta devuelve:
+Respuesta:
 
 ```json
 {
   "token_type": "Bearer",
-  "access_token": "eyJ...",
+  "access_token": "<TOKEN>",
   "usuario": {
-    "role": "ADMIN"
+    "id": 1,
+    "name": "Nombre del usuario",
+    "email": "usuario@example.com",
+    "role": "USUARIO",
+    "compania_id": 1
   }
 }
 ```
 
-Para probar endpoints protegidos:
+## Roles y autorizacion
 
-```http
-Authorization: Bearer TOKEN_JWT
-Accept: application/json
-Content-Type: application/json
+| Operacion | Autorizacion |
+|---|---|
+| GET de recursos | Usuario autenticado |
+| POST / PUT / PATCH | `ADMIN` o `USUARIO` |
+| DELETE de companias | Solo `ADMIN` |
+| Creacion transaccional de compania con empleados | Solo `ADMIN` |
+| Actualizar o eliminar empleados | `ADMIN` o usuario propietario segun policy |
+
+La policy `EmpleadoPolicy` permite que un usuario de rol `USUARIO` modifique empleados solo si pertenecen a su misma compania.
+
+## Endpoints principales
+
+### Auth
+
+```text
+POST /api/auth/registro
+POST /api/auth/login
+GET  /api/auth/perfil
 ```
 
-## Modulo 1 - CRUD de colecciones
+### Companias
 
-### Listado paginado, filtrado y ordenado
+```text
+GET    /api/companias
+POST   /api/companias
+DELETE /api/companias
+GET    /api/companias/{id}
+PUT    /api/companias/{id}
+PATCH  /api/companias/{id}
+DELETE /api/companias/{id}
+GET    /api/companias/{id}/empleados
+POST   /api/companias/con-empleados
+POST   /api/companias/con-empleados/async
+```
+
+### Empleados
+
+```text
+GET    /api/empleados
+POST   /api/empleados
+POST   /api/empleados/bulk
+POST   /api/empleados/async
+DELETE /api/empleados
+GET    /api/empleados/{id}
+PUT    /api/empleados/{id}
+PATCH  /api/empleados/{id}
+DELETE /api/empleados/{id}
+```
+
+## Colecciones
+
+### Paginacion, filtrado y ordenamiento
+
+Ejemplo:
 
 ```http
 GET /api/empleados?pagina=1&tamano=10&orden=apellido&dir=asc&buscar=gomez
@@ -140,13 +261,7 @@ Respuesta:
 }
 ```
 
-Tambien aplica para:
-
-```http
-GET /api/companias?pagina=1&tamano=10&orden=nombre&dir=asc&buscar=tech
-```
-
-### Creacion masiva de empleados
+### Creacion masiva
 
 ```http
 POST /api/empleados/bulk
@@ -158,33 +273,24 @@ POST /api/empleados/bulk
     {
       "nombre": "Ana",
       "apellido": "Gomez",
-      "correo": "ana.bulk@test.com",
+      "correo": "ana@example.com",
       "cargo": "Dev",
       "salario": 3500000,
-      "compania_id": 1
-    },
-    {
-      "nombre": "Carlos",
-      "apellido": "Rojas",
-      "correo": "carlos.bulk@test.com",
-      "cargo": "QA",
-      "salario": 2800000,
       "compania_id": 1
     }
   ]
 }
 ```
 
-### PATCH parcial
+### Actualizacion parcial
 
 ```http
-PATCH /api/empleados/1
+PATCH /api/empleados/{id}
 ```
 
 ```json
 {
-  "cargo": "Lider tecnico",
-  "salario": 5200000
+  "cargo": "Lider tecnico"
 }
 ```
 
@@ -196,45 +302,40 @@ DELETE /api/empleados
 
 ```json
 {
-  "ids": [4, 5]
+  "ids": [1, 2, 3]
 }
 ```
 
-Tambien existe:
+## Programacion asincrona
 
-```http
-DELETE /api/companias
-```
+Laravel con Eloquent trabaja normalmente de forma sincronica. Para procesamiento asincrono se usan Jobs y Queues.
 
-## Modulo 2 - Programacion asincrona
-
-Laravel con Eloquent trabaja normalmente de forma sincronica. La alternativa idiomatica para asincronia en Laravel son Jobs y Queues.
-
-Flujo sincronico:
+Endpoint sincronico:
 
 ```text
+POST /api/empleados
+```
+
+Endpoint asincrono:
+
+```text
+POST /api/empleados/async
+```
+
+Diferencia:
+
+```text
+Sincronico:
 Controller -> Service -> UnitOfWork -> Repository -> DB -> Respuesta 201
-```
 
-Flujo asincrono:
-
-```text
+Asincrono:
 Controller -> Queue -> Respuesta 202
 Worker -> Job -> Service -> UnitOfWork -> Repository -> DB
 ```
 
-Endpoints:
+## Validaciones
 
-```http
-POST /api/empleados/async
-POST /api/companias/con-empleados/async
-```
-
-`/async` responde `202 Accepted` y el worker procesa despues.
-
-## Modulo 3 - Validaciones
-
-Se usan validaciones nativas de Laravel con `Request::validate()` antes de entrar al Service. Los errores se centralizan en `bootstrap/app.php` y devuelven formato uniforme:
+Las validaciones se aplican antes de entrar a la capa de aplicacion. Los errores se devuelven con formato uniforme:
 
 ```json
 {
@@ -242,123 +343,48 @@ Se usan validaciones nativas de Laravel con `Request::validate()` antes de entra
   "errores": [
     {
       "campo": "correo",
-      "detalle": "The correo field must be a valid email address."
+      "detalle": "El campo no tiene un formato valido."
     }
   ]
 }
 ```
 
-Reglas principales:
-
-| Campo | Reglas |
-|---|---|
-| nombre | requerido, string, longitud maxima |
-| correo | requerido, email, unico |
-| salario | requerido, numerico, mayor a 0 |
-| compania_id | existe en `companias` |
-
-## Modulo 4 - Pruebas
-
-Comando:
+## Pruebas
 
 ```bash
 php artisan test
 ```
 
-Se agregaron pruebas en `tests/Feature/ParteIIApiTest.php` para:
+Las pruebas cubren:
 
 - Login JWT.
-- Bulk insert.
+- Creacion masiva.
 - Listado paginado.
 - Policy de propiedad.
-- Rollback del endpoint transaccional.
+- Rollback transaccional.
 
-Nota local: este PHP no tiene `pdo_sqlite` habilitado; por eso las pruebas de integracion quedan marcadas como skipped en esta maquina. Al habilitar `pdo_sqlite`, se ejecutan con SQLite en memoria segun `phpunit.xml`.
-
-## Modulo 5 - JWT por roles
-
-Roles:
-
-| Operacion | Rol |
-|---|---|
-| GET | ADMIN o USUARIO autenticado |
-| POST / PUT / PATCH | ADMIN o USUARIO |
-| DELETE companias | ADMIN |
-| DELETE empleados | ADMIN o propietario por policy |
-| POST /api/companias/con-empleados | ADMIN |
-
-El JWT contiene claims:
-
-```json
-{
-  "sub": 1,
-  "correo": "admin@api.com",
-  "rol": "ADMIN",
-  "compania_id": null,
-  "exp": 9999999999
-}
-```
-
-## Modulo 6 - Policies
-
-Se implemento `EmpleadoPolicy`.
-
-Regla:
-
-- ADMIN puede actualizar y eliminar cualquier empleado.
-- USUARIO solo puede actualizar o eliminar empleados cuya `compania_id` coincida con la `compania_id` de su token.
-
-Prueba manual:
-
-1. Crear usuario `USUARIO` con `compania_id = 1`.
-2. Hacer login.
-3. Intentar `PATCH /api/empleados/{id}` de un empleado de compania 1: debe responder 200.
-4. Intentar con empleado de otra compania: debe responder 403.
+Para pruebas con SQLite en memoria, asegurese de tener habilitada la extension `pdo_sqlite`.
 
 ## Comparacion con ASP.NET Core
 
 | ASP.NET Core | Laravel |
 |---|---|
-| Controllers | Controllers |
-| Services | Application Services |
-| Repository interfaces | Domain Interfaces |
-| EF DbContext transaction | UnitOfWork con DB transactions |
-| `async/await` + `Task<T>` | Jobs y Queues |
+| Controller | Controller |
+| Service Layer | Application Service |
+| Repository Interface | Domain Interface |
+| EF Core DbContext | Eloquent ORM |
+| Transaction / SaveChanges | UnitOfWork commit / rollback |
+| async/await + Task | Jobs y Queues |
 | DataAnnotations / FluentValidation | `Request::validate()` |
 | xUnit / NUnit | PHPUnit |
-| AddJwtBearer | Middleware JWT propio |
+| AddJwtBearer | Middleware JWT |
 | `[Authorize(Roles="ADMIN")]` | Middleware `role:ADMIN` |
-| `[Authorize(Policy="...")]` | `EmpleadoPolicy` + Gate |
-| ClaimsPrincipal | Usuario resuelto desde JWT |
+| `[Authorize(Policy="...")]` | Laravel Policy |
 
-## Endpoints principales
+## Seguridad
 
-```text
-POST   /api/auth/registro
-POST   /api/auth/login
-GET    /api/auth/perfil
-
-GET    /api/companias
-POST   /api/companias
-PATCH  /api/companias/{id}
-DELETE /api/companias
-DELETE /api/companias/{id}
-POST   /api/companias/con-empleados
-POST   /api/companias/con-empleados/async
-
-GET    /api/empleados
-POST   /api/empleados
-POST   /api/empleados/bulk
-POST   /api/empleados/async
-PATCH  /api/empleados/{id}
-DELETE /api/empleados
-DELETE /api/empleados/{id}
-```
-
-## Conclusiones
-
-- La API ahora opera sobre objetos y colecciones.
-- La asincronia se resolvio con Jobs y Queues, el mecanismo natural de Laravel.
-- Las transacciones siguen centralizadas en Unit of Work.
-- JWT protege los endpoints y transporta claims de rol y compania.
-- Las policies permiten reglas mas finas que los roles.
+- Las credenciales reales deben vivir fuera del repositorio.
+- `.env` no debe versionarse.
+- `JWT_SECRET` debe ser privado y suficientemente largo.
+- Los tokens no deben guardarse en el README, commits, issues ni capturas publicas.
+- Las contrasenas se almacenan con hash mediante Laravel.
