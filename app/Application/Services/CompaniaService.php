@@ -12,20 +12,36 @@ class CompaniaService
 
     public function getAll(): array
     {
-        Log::info('[CompaniaService] Consultando todas las compañías.');
+        Log::info('[CompaniaService] Consultando todas las companias.');
         return $this->uow->companias()->getAll()->toArray();
+    }
+
+    public function getPaginated(array $filters): array
+    {
+        Log::info('[CompaniaService] Consultando companias con paginacion.');
+        $page = $this->uow->companias()->paginate($filters);
+
+        return [
+            'datos' => $page->items(),
+            'paginacion' => [
+                'pagina_actual' => $page->currentPage(),
+                'tamano' => $page->perPage(),
+                'total' => $page->total(),
+                'ultima_pagina' => $page->lastPage(),
+            ],
+        ];
     }
 
     public function getById(int $id): ?array
     {
-        Log::info("[CompaniaService] Consultando compañía ID: $id");
+        Log::info("[CompaniaService] Consultando compania ID: $id");
         $compania = $this->uow->companias()->getById($id);
         return $compania?->toArray();
     }
 
     public function getWithEmpleados(int $id): ?array
     {
-        Log::info("[CompaniaService] Consultando compañía con empleados ID: $id");
+        Log::info("[CompaniaService] Consultando compania con empleados ID: $id");
         $compania = $this->uow->companias()->getWithEmpleados($id);
         return $compania?->toArray();
     }
@@ -34,22 +50,22 @@ class CompaniaService
     {
         try {
             $this->uow->beginTransaction();
-            Log::info('[CompaniaService] Creando compañía: ' . $dto->nombre);
+            Log::info('[CompaniaService] Creando compania: ' . $dto->nombre);
 
             $compania = $this->uow->companias()->create([
-                'nombre'         => $dto->nombre,
-                'direccion'      => $dto->direccion,
-                'telefono'       => $dto->telefono,
+                'nombre' => $dto->nombre,
+                'direccion' => $dto->direccion,
+                'telefono' => $dto->telefono,
                 'fecha_creacion' => now(),
             ]);
 
             $this->uow->commit();
-            Log::info('[CompaniaService] Compañía creada con ID: ' . $compania->id);
+            Log::info('[CompaniaService] Compania creada con ID: ' . $compania->id);
             return $compania->toArray();
 
         } catch (\Exception $e) {
             $this->uow->rollback();
-            Log::error('[CompaniaService] Error al crear compañía: ' . $e->getMessage());
+            Log::error('[CompaniaService] Error al crear compania: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -60,18 +76,36 @@ class CompaniaService
             $this->uow->beginTransaction();
 
             $compania = $this->uow->companias()->update($id, [
-                'nombre'    => $dto->nombre,
+                'nombre' => $dto->nombre,
                 'direccion' => $dto->direccion,
-                'telefono'  => $dto->telefono,
+                'telefono' => $dto->telefono,
             ]);
 
             $this->uow->commit();
-            Log::info("[CompaniaService] Compañía ID: $id actualizada.");
+            Log::info("[CompaniaService] Compania ID: $id actualizada.");
             return $compania?->toArray();
 
         } catch (\Exception $e) {
             $this->uow->rollback();
             Log::error('[CompaniaService] Error al actualizar: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function patch(int $id, array $data): ?array
+    {
+        try {
+            $this->uow->beginTransaction();
+
+            $compania = $this->uow->companias()->patch($id, $data);
+
+            $this->uow->commit();
+            Log::info("[CompaniaService] Compania ID: $id actualizada parcialmente.");
+            return $compania?->toArray();
+
+        } catch (\Exception $e) {
+            $this->uow->rollback();
+            Log::error('[CompaniaService] Error en patch: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -82,7 +116,7 @@ class CompaniaService
             $this->uow->beginTransaction();
             $result = $this->uow->companias()->delete($id);
             $this->uow->commit();
-            Log::info("[CompaniaService] Compañía ID: $id eliminada.");
+            Log::info("[CompaniaService] Compania ID: $id eliminada.");
             return $result;
 
         } catch (\Exception $e) {
@@ -92,32 +126,48 @@ class CompaniaService
         }
     }
 
+    public function deleteMany(array $ids): int
+    {
+        try {
+            $this->uow->beginTransaction();
+            $deleted = $this->uow->companias()->deleteMany($ids);
+            $this->uow->commit();
+            Log::info('[CompaniaService] Companias eliminadas masivamente: ' . $deleted);
+            return $deleted;
+
+        } catch (\Exception $e) {
+            $this->uow->rollback();
+            Log::error('[CompaniaService] Error en eliminacion multiple: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     public function createConEmpleados(CompaniaDTO $dto): array
     {
         try {
             $this->uow->beginTransaction();
-            Log::info('[CompaniaService] Iniciando creación transaccional con empleados.');
+            Log::info('[CompaniaService] Iniciando creacion transaccional con empleados.');
 
             $compania = $this->uow->companias()->create([
-                'nombre'         => $dto->nombre,
-                'direccion'      => $dto->direccion,
-                'telefono'       => $dto->telefono,
+                'nombre' => $dto->nombre,
+                'direccion' => $dto->direccion,
+                'telefono' => $dto->telefono,
                 'fecha_creacion' => now(),
             ]);
 
             foreach ($dto->empleados as $emp) {
                 $this->uow->empleados()->create([
-                    'nombre'      => $emp['nombre'],
-                    'apellido'    => $emp['apellido'],
-                    'correo'      => $emp['correo'],
-                    'cargo'       => $emp['cargo'],
-                    'salario'     => $emp['salario'],
+                    'nombre' => $emp['nombre'],
+                    'apellido' => $emp['apellido'],
+                    'correo' => $emp['correo'],
+                    'cargo' => $emp['cargo'],
+                    'salario' => $emp['salario'],
                     'compania_id' => $compania->id,
                 ]);
             }
 
             $this->uow->commit();
-            Log::info('[CompaniaService] Transacción completada. Compañía ID: ' . $compania->id);
+            Log::info('[CompaniaService] Transaccion completada. Compania ID: ' . $compania->id);
             return $this->uow->companias()->getWithEmpleados($compania->id)->toArray();
 
         } catch (\Exception $e) {

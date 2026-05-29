@@ -3,16 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Empleado;
 
 class EmpleadoSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::disableForeignKeyConstraints();
         Empleado::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::enableForeignKeyConstraints();
 
         Empleado::insert([
             ['nombre' => 'Ana',     'apellido' => 'Gómez',    'correo' => 'ana.gomez@tech.com',        'cargo' => 'Desarrolladora', 'salario' => 3500000, 'compania_id' => 1, 'created_at' => now(), 'updated_at' => now()],

@@ -16,6 +16,22 @@ class EmpleadoService
         return $this->uow->empleados()->getAll()->toArray();
     }
 
+    public function getPaginated(array $filters): array
+    {
+        Log::info('[EmpleadoService] Consultando empleados con paginacion.');
+        $page = $this->uow->empleados()->paginate($filters);
+
+        return [
+            'datos' => $page->items(),
+            'paginacion' => [
+                'pagina_actual' => $page->currentPage(),
+                'tamano' => $page->perPage(),
+                'total' => $page->total(),
+                'ultima_pagina' => $page->lastPage(),
+            ],
+        ];
+    }
+
     public function getById(int $id): ?array
     {
         Log::info("[EmpleadoService] Consultando empleado ID: $id");
@@ -30,11 +46,11 @@ class EmpleadoService
             Log::info('[EmpleadoService] Creando empleado: ' . $dto->nombre);
 
             $empleado = $this->uow->empleados()->create([
-                'nombre'      => $dto->nombre,
-                'apellido'    => $dto->apellido,
-                'correo'      => $dto->correo,
-                'cargo'       => $dto->cargo,
-                'salario'     => $dto->salario,
+                'nombre' => $dto->nombre,
+                'apellido' => $dto->apellido,
+                'correo' => $dto->correo,
+                'cargo' => $dto->cargo,
+                'salario' => $dto->salario,
                 'compania_id' => $dto->compania_id,
             ]);
 
@@ -49,17 +65,35 @@ class EmpleadoService
         }
     }
 
+    public function createMany(array $empleados): array
+    {
+        try {
+            $this->uow->beginTransaction();
+            Log::info('[EmpleadoService] Creando empleados masivamente: ' . count($empleados));
+
+            $creados = $this->uow->empleados()->createMany($empleados);
+
+            $this->uow->commit();
+            return $creados->toArray();
+
+        } catch (\Exception $e) {
+            $this->uow->rollback();
+            Log::error('[EmpleadoService] Rollback en creacion masiva: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     public function update(int $id, EmpleadoDTO $dto): ?array
     {
         try {
             $this->uow->beginTransaction();
 
             $empleado = $this->uow->empleados()->update($id, [
-                'nombre'      => $dto->nombre,
-                'apellido'    => $dto->apellido,
-                'correo'      => $dto->correo,
-                'cargo'       => $dto->cargo,
-                'salario'     => $dto->salario,
+                'nombre' => $dto->nombre,
+                'apellido' => $dto->apellido,
+                'correo' => $dto->correo,
+                'cargo' => $dto->cargo,
+                'salario' => $dto->salario,
                 'compania_id' => $dto->compania_id,
             ]);
 
@@ -70,6 +104,24 @@ class EmpleadoService
         } catch (\Exception $e) {
             $this->uow->rollback();
             Log::error('[EmpleadoService] Error al actualizar: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function patch(int $id, array $data): ?array
+    {
+        try {
+            $this->uow->beginTransaction();
+
+            $empleado = $this->uow->empleados()->patch($id, $data);
+
+            $this->uow->commit();
+            Log::info("[EmpleadoService] Empleado ID: $id actualizado parcialmente.");
+            return $empleado?->toArray();
+
+        } catch (\Exception $e) {
+            $this->uow->rollback();
+            Log::error('[EmpleadoService] Error en patch: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -86,6 +138,22 @@ class EmpleadoService
         } catch (\Exception $e) {
             $this->uow->rollback();
             Log::error('[EmpleadoService] Error al eliminar: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function deleteMany(array $ids): int
+    {
+        try {
+            $this->uow->beginTransaction();
+            $deleted = $this->uow->empleados()->deleteMany($ids);
+            $this->uow->commit();
+            Log::info('[EmpleadoService] Empleados eliminados masivamente: ' . $deleted);
+            return $deleted;
+
+        } catch (\Exception $e) {
+            $this->uow->rollback();
+            Log::error('[EmpleadoService] Error en eliminacion multiple: ' . $e->getMessage());
             throw $e;
         }
     }
