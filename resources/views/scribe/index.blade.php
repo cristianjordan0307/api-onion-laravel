@@ -8,8 +8,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.style.css") }}" media="screen">
-    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.print.css") }}" media="print">
+    <link rel="stylesheet" href="/vendor/scribe/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="/vendor/scribe/css/theme-default.print.css" media="print">
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 
@@ -26,13 +26,13 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://127.0.0.1:8000";
+        var tryItOutBaseUrl = "https://api-onion-laravel-production.up.railway.app";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
-    <script src="{{ asset("/vendor/scribe/js/tryitout-5.10.0.js") }}"></script>
+    <script src="/vendor/scribe/js/tryitout-5.10.0.js"></script>
 
-    <script src="{{ asset("/vendor/scribe/js/theme-default-5.10.0.js") }}"></script>
+    <script src="/vendor/scribe/js/theme-default-5.10.0.js"></script>
 
 </head>
 
@@ -41,7 +41,7 @@
 <a href="#" id="nav-button">
     <span>
         MENU
-        <img src="{{ asset("/vendor/scribe/images/navbar.png") }}" alt="navbar-image"/>
+        <img src="/vendor/scribe/images/navbar.png" alt="navbar-image"/>
     </span>
 </a>
 <div class="tocify-wrapper">
@@ -148,7 +148,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 28, 2026</li>
+        <li>Last updated: May 29, 2026</li>
     </ul>
 </div>
 
@@ -157,7 +157,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://127.0.0.1:8000</code>
+    <strong>Base URL</strong>: <code>https://api-onion-laravel-production.up.railway.app</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -187,7 +187,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/auth/registro" \
+    "https://api-onion-laravel-production.up.railway.app/api/auth/registro" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -203,7 +203,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/auth/registro"
+    "https://api-onion-laravel-production.up.railway.app/api/auth/registro"
 );
 
 const headers = {
@@ -392,7 +392,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/auth/login" \
+    "https://api-onion-laravel-production.up.railway.app/api/auth/login" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -405,7 +405,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/auth/login"
+    "https://api-onion-laravel-production.up.railway.app/api/auth/login"
 );
 
 const headers = {
@@ -553,7 +553,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/auth/perfil" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/auth/perfil" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -561,7 +561,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/auth/perfil"
+    "https://api-onion-laravel-production.up.railway.app/api/auth/perfil"
 );
 
 const headers = {
@@ -695,7 +695,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/companias" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/companias" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -703,7 +703,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias"
+    "https://api-onion-laravel-production.up.railway.app/api/companias"
 );
 
 const headers = {
@@ -837,7 +837,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/companias" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -845,7 +845,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias"
+    "https://api-onion-laravel-production.up.railway.app/api/companias"
 );
 
 const headers = {
@@ -963,7 +963,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/companias" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -971,7 +971,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias"
+    "https://api-onion-laravel-production.up.railway.app/api/companias"
 );
 
 const headers = {
@@ -1089,7 +1089,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/companias/con-empleados" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1097,7 +1097,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/con-empleados"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados"
 );
 
 const headers = {
@@ -1215,7 +1215,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/companias/con-empleados/async" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados/async" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1223,7 +1223,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/con-empleados/async"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados/async"
 );
 
 const headers = {
@@ -1341,7 +1341,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/companias/architecto" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1349,7 +1349,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto"
 );
 
 const headers = {
@@ -1496,7 +1496,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/companias/architecto/empleados" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/companias/architecto/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1504,7 +1504,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/architecto/empleados"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto/empleados"
 );
 
 const headers = {
@@ -1651,7 +1651,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/companias/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1659,7 +1659,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto"
 );
 
 const headers = {
@@ -1790,7 +1790,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/companias/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1798,7 +1798,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto"
 );
 
 const headers = {
@@ -1929,7 +1929,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/companias/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1937,7 +1937,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/companias/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/companias/architecto"
 );
 
 const headers = {
@@ -2068,7 +2068,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/empleados" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2076,7 +2076,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados"
 );
 
 const headers = {
@@ -2210,7 +2210,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/empleados" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2218,7 +2218,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados"
 );
 
 const headers = {
@@ -2336,7 +2336,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/empleados" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2344,7 +2344,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados"
 );
 
 const headers = {
@@ -2462,7 +2462,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/empleados/bulk" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/bulk" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2470,7 +2470,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/bulk"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/bulk"
 );
 
 const headers = {
@@ -2588,7 +2588,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/empleados/async" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/async" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2596,7 +2596,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/async"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/async"
 );
 
 const headers = {
@@ -2714,7 +2714,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/empleados/architecto" \
+    --get "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2722,7 +2722,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto"
 );
 
 const headers = {
@@ -2869,7 +2869,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/empleados/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2877,7 +2877,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto"
 );
 
 const headers = {
@@ -3008,7 +3008,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/empleados/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3016,7 +3016,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto"
 );
 
 const headers = {
@@ -3147,7 +3147,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/empleados/architecto" \
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3155,7 +3155,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/empleados/architecto"
+    "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto"
 );
 
 const headers = {
