@@ -5,6 +5,12 @@ use App\Http\Controllers\CompaniaController;
 use App\Http\Controllers\EmpleadoController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/openapi.yaml', function () {
+    return response()->file(public_path('docs.openapi.yaml'), [
+        'Content-Type' => 'application/yaml',
+    ]);
+});
+
 Route::prefix('auth')->group(function () {
     Route::post('/registro', [AuthController::class, 'registro']);
     Route::post('/login', [AuthController::class, 'login']);

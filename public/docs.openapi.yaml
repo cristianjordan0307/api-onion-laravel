@@ -1,0 +1,686 @@
+openapi: 3.0.3
+info:
+  title: 'Laravel API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://api-onion-laravel-production.up.railway.app'
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'Obtenga el token en <code>POST /api/auth/login</code> y envie <code>Authorization: Bearer {TOKEN_JWT}</code>.'
+security:
+  -
+    default: []
+paths:
+  /api/auth/registro:
+    post:
+      summary: ''
+      operationId: postApiAuthRegistro
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: b
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: zbailey@example.net
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: '-0pBNvYgxw'
+                role:
+                  type: string
+                  description: ''
+                  example: USUARIO
+                  enum:
+                    - ADMIN
+                    - USUARIO
+                compania_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the companias table.'
+                  example: 16
+                  nullable: true
+              required:
+                - name
+                - email
+                - password
+  /api/auth/login:
+    post:
+      summary: ''
+      operationId: postApiAuthLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: gbailey@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: '|]|{+-'
+              required:
+                - email
+                - password
+  /api/auth/perfil:
+    get:
+      summary: ''
+      operationId: getApiAuthPerfil
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+  /api/companias:
+    get:
+      summary: ''
+      operationId: getApiCompanias
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Crear compania.'
+      operationId: crearCompania
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre de la compania.'
+                  example: 'Tech Solutions'
+                direccion:
+                  type: string
+                  description: 'Direccion de la compania.'
+                  example: 'Calle 1 # 2-3'
+                telefono:
+                  type: string
+                  description: 'Telefono de contacto.'
+                  example: '3001234567'
+              required:
+                - nombre
+                - direccion
+                - telefono
+    delete:
+      summary: 'Eliminar companias masivamente.'
+      operationId: eliminarCompaniasMasivamente
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  description: 'IDs de companias existentes.'
+                  example:
+                    - 1
+                    - 2
+                    - 3
+                  items:
+                    type: integer
+              required:
+                - ids
+  /api/companias/con-empleados:
+    post:
+      summary: 'Crear compania con empleados.'
+      operationId: crearCompaniaConEmpleados
+      description: 'Crea la compania y sus empleados dentro de una sola transaccion.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre de la compania.'
+                  example: 'Empresa Demo'
+                direccion:
+                  type: string
+                  description: 'Direccion de la compania.'
+                  example: 'Calle 20 # 30-40'
+                telefono:
+                  type: string
+                  description: 'Telefono de contacto.'
+                  example: '3009876543'
+                empleados:
+                  type: array
+                  description: 'Lista de empleados de la compania.'
+                  example:
+                    - architecto
+                  items:
+                    type: string
+              required:
+                - nombre
+                - direccion
+                - telefono
+                - empleados
+  /api/companias/con-empleados/async:
+    post:
+      summary: 'Crear compania con empleados asincronicamente.'
+      operationId: crearCompaniaConEmpleadosAsincronicamente
+      description: 'Encola la creacion transaccional para que la procese un worker.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre de la compania.'
+                  example: 'Empresa Async'
+                direccion:
+                  type: string
+                  description: 'Direccion de la compania.'
+                  example: 'Calle 50 # 10-20'
+                telefono:
+                  type: string
+                  description: 'Telefono de contacto.'
+                  example: '3005556677'
+                empleados:
+                  type: array
+                  description: 'Lista de empleados de la compania.'
+                  example:
+                    - architecto
+                  items:
+                    type: string
+              required:
+                - nombre
+                - direccion
+                - telefono
+                - empleados
+  '/api/companias/{id}':
+    get:
+      summary: ''
+      operationId: getApiCompaniasId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Actualizar compania completa.'
+      operationId: actualizarCompaniaCompleta
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre de la compania.'
+                  example: 'Tech Solutions'
+                direccion:
+                  type: string
+                  description: 'Direccion de la compania.'
+                  example: 'Calle 1 # 2-3'
+                telefono:
+                  type: string
+                  description: 'Telefono de contacto.'
+                  example: '3001234567'
+              required:
+                - nombre
+                - direccion
+                - telefono
+    patch:
+      summary: 'Actualizar compania parcialmente.'
+      operationId: actualizarCompaniaParcialmente
+      description: 'En PATCH solo se envian los campos que se quieren cambiar.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre de la compania.'
+                  example: 'Tech Actualizada'
+                direccion:
+                  type: string
+                  description: 'Direccion de la compania.'
+                  example: 'Carrera 10 # 20-30'
+                telefono:
+                  type: string
+                  description: 'Telefono de contacto.'
+                  example: '3101234567'
+    delete:
+      summary: ''
+      operationId: deleteApiCompaniasId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the compania.'
+        example: architecto
+        required: true
+        schema:
+          type: string
+  '/api/companias/{id}/empleados':
+    get:
+      summary: ''
+      operationId: getApiCompaniasIdEmpleados
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the compania.'
+        example: architecto
+        required: true
+        schema:
+          type: string
+  /api/empleados:
+    get:
+      summary: ''
+      operationId: getApiEmpleados
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Crear empleado.'
+      operationId: crearEmpleado
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre del empleado.'
+                  example: Ana
+                apellido:
+                  type: string
+                  description: 'Apellido del empleado.'
+                  example: Gomez
+                correo:
+                  type: string
+                  description: 'Correo unico del empleado.'
+                  example: ana.gomez@example.com
+                cargo:
+                  type: string
+                  description: 'Cargo del empleado.'
+                  example: Desarrolladora
+                salario:
+                  type: number
+                  description: 'Salario positivo.'
+                  example: 3500000.0
+                compania_id:
+                  type: integer
+                  description: 'ID de la compania existente.'
+                  example: 1
+              required:
+                - nombre
+                - apellido
+                - correo
+                - cargo
+                - salario
+                - compania_id
+    delete:
+      summary: 'Eliminar empleados masivamente.'
+      operationId: eliminarEmpleadosMasivamente
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  description: 'IDs de empleados existentes.'
+                  example:
+                    - 1
+                    - 2
+                    - 3
+                  items:
+                    type: integer
+              required:
+                - ids
+  /api/empleados/bulk:
+    post:
+      summary: 'Crear empleados masivamente.'
+      operationId: crearEmpleadosMasivamente
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                empleados:
+                  type: array
+                  description: 'Lista de empleados a crear en una sola transaccion.'
+                  example:
+                    - architecto
+                  items:
+                    type: string
+              required:
+                - empleados
+  /api/empleados/async:
+    post:
+      summary: 'Crear empleado asincronicamente.'
+      operationId: crearEmpleadoAsincronicamente
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre del empleado.'
+                  example: Laura
+                apellido:
+                  type: string
+                  description: 'Apellido del empleado.'
+                  example: Perez
+                correo:
+                  type: string
+                  description: 'Correo unico del empleado.'
+                  example: laura.async@example.com
+                cargo:
+                  type: string
+                  description: 'Cargo del empleado.'
+                  example: Dev
+                salario:
+                  type: number
+                  description: 'Salario positivo.'
+                  example: 3500000.0
+                compania_id:
+                  type: integer
+                  description: 'ID de la compania existente.'
+                  example: 1
+              required:
+                - nombre
+                - apellido
+                - correo
+                - cargo
+                - salario
+                - compania_id
+  '/api/empleados/{id}':
+    get:
+      summary: ''
+      operationId: getApiEmpleadosId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Token JWT invalido o expirado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Token JWT invalido o expirado.'
+      tags:
+        - Endpoints
+    put:
+      summary: 'Actualizar empleado completo.'
+      operationId: actualizarEmpleadoCompleto
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre del empleado.'
+                  example: Ana
+                apellido:
+                  type: string
+                  description: 'Apellido del empleado.'
+                  example: Gomez
+                correo:
+                  type: string
+                  description: 'Correo unico del empleado.'
+                  example: ana.update@example.com
+                cargo:
+                  type: string
+                  description: 'Cargo del empleado.'
+                  example: 'Lider tecnico'
+                salario:
+                  type: number
+                  description: 'Salario positivo.'
+                  example: 4200000.0
+                compania_id:
+                  type: integer
+                  description: 'ID de la compania existente.'
+                  example: 1
+              required:
+                - nombre
+                - apellido
+                - correo
+                - cargo
+                - salario
+                - compania_id
+    patch:
+      summary: 'Actualizar empleado parcialmente.'
+      operationId: actualizarEmpleadoParcialmente
+      description: 'En PATCH solo se envian los campos que se quieren cambiar.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: 'Nombre del empleado.'
+                  example: Ana
+                apellido:
+                  type: string
+                  description: 'Apellido del empleado.'
+                  example: Gomez
+                correo:
+                  type: string
+                  description: 'Correo unico del empleado.'
+                  example: ana.patch@example.com
+                cargo:
+                  type: string
+                  description: 'Cargo del empleado.'
+                  example: 'Lider QA'
+                salario:
+                  type: number
+                  description: 'Salario positivo.'
+                  example: 5200000.0
+                compania_id:
+                  type: integer
+                  description: 'ID de la compania existente.'
+                  example: 1
+    delete:
+      summary: ''
+      operationId: deleteApiEmpleadosId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the empleado.'
+        example: architecto
+        required: true
+        schema:
+          type: string
