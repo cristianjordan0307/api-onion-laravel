@@ -256,7 +256,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Crear compania.'
       description: ''
       authenticated: true
       deprecated: false
@@ -268,8 +268,44 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre de la compania.'
+        required: true
+        example: 'Tech Solutions'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      direccion:
+        custom: []
+        name: direccion
+        description: 'Direccion de la compania.'
+        required: true
+        example: 'Calle 1 # 2-3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      telefono:
+        custom: []
+        name: telefono
+        description: 'Telefono de contacto.'
+        required: true
+        example: '3001234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: 'Tech Solutions'
+      direccion: 'Calle 1 # 2-3'
+      telefono: '3001234567'
     fileParameters: []
     responses: []
     responseFields: []
@@ -291,7 +327,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Eliminar companias masivamente.'
       description: ''
       authenticated: true
       deprecated: false
@@ -303,8 +339,26 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      ids:
+        custom: []
+        name: ids
+        description: 'IDs de companias existentes.'
+        required: true
+        example:
+          - 1
+          - 2
+          - 3
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      ids:
+        - 1
+        - 2
+        - 3
     fileParameters: []
     responses: []
     responseFields: []
@@ -326,8 +380,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Crear compania con empleados.'
+      description: 'Crea la compania y sus empleados dentro de una sola transaccion.'
       authenticated: true
       deprecated: false
     headers:
@@ -338,8 +392,113 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre de la compania.'
+        required: true
+        example: 'Empresa Demo'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      direccion:
+        custom: []
+        name: direccion
+        description: 'Direccion de la compania.'
+        required: true
+        example: 'Calle 20 # 30-40'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      telefono:
+        custom: []
+        name: telefono
+        description: 'Telefono de contacto.'
+        required: true
+        example: '3009876543'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      empleados:
+        custom: []
+        name: empleados
+        description: 'Lista de empleados de la compania.'
+        required: true
+        example:
+          - architecto
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'empleados[].nombre':
+        custom: []
+        name: 'empleados[].nombre'
+        description: 'Nombre del empleado.'
+        required: true
+        example: Ana
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].apellido':
+        custom: []
+        name: 'empleados[].apellido'
+        description: 'Apellido del empleado.'
+        required: true
+        example: Gomez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].correo':
+        custom: []
+        name: 'empleados[].correo'
+        description: 'Correo unico del empleado.'
+        required: true
+        example: ana.demo@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].cargo':
+        custom: []
+        name: 'empleados[].cargo'
+        description: 'Cargo del empleado.'
+        required: true
+        example: Dev
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].salario':
+        custom: []
+        name: 'empleados[].salario'
+        description: 'Salario positivo.'
+        required: true
+        example: 3500000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: 'Empresa Demo'
+      direccion: 'Calle 20 # 30-40'
+      telefono: '3009876543'
+      empleados:
+        - architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -361,8 +520,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Crear compania con empleados asincronicamente.'
+      description: 'Encola la creacion transaccional para que la procese un worker.'
       authenticated: true
       deprecated: false
     headers:
@@ -373,8 +532,113 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre de la compania.'
+        required: true
+        example: 'Empresa Async'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      direccion:
+        custom: []
+        name: direccion
+        description: 'Direccion de la compania.'
+        required: true
+        example: 'Calle 50 # 10-20'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      telefono:
+        custom: []
+        name: telefono
+        description: 'Telefono de contacto.'
+        required: true
+        example: '3005556677'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      empleados:
+        custom: []
+        name: empleados
+        description: 'Lista de empleados de la compania.'
+        required: true
+        example:
+          - architecto
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'empleados[].nombre':
+        custom: []
+        name: 'empleados[].nombre'
+        description: 'Nombre del empleado.'
+        required: true
+        example: Carlos
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].apellido':
+        custom: []
+        name: 'empleados[].apellido'
+        description: 'Apellido del empleado.'
+        required: true
+        example: Rojas
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].correo':
+        custom: []
+        name: 'empleados[].correo'
+        description: 'Correo unico del empleado.'
+        required: true
+        example: carlos.async@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].cargo':
+        custom: []
+        name: 'empleados[].cargo'
+        description: 'Cargo del empleado.'
+        required: true
+        example: QA
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].salario':
+        custom: []
+        name: 'empleados[].salario'
+        description: 'Salario positivo.'
+        required: true
+        example: 2800000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: 'Empresa Async'
+      direccion: 'Calle 50 # 10-20'
+      telefono: '3005556677'
+      empleados:
+        - architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -508,7 +772,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Actualizar compania completa.'
       description: ''
       authenticated: true
       deprecated: false
@@ -532,8 +796,44 @@ endpoints:
       id: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre de la compania.'
+        required: true
+        example: 'Tech Solutions'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      direccion:
+        custom: []
+        name: direccion
+        description: 'Direccion de la compania.'
+        required: true
+        example: 'Calle 1 # 2-3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      telefono:
+        custom: []
+        name: telefono
+        description: 'Telefono de contacto.'
+        required: true
+        example: '3001234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: 'Tech Solutions'
+      direccion: 'Calle 1 # 2-3'
+      telefono: '3001234567'
     fileParameters: []
     responses: []
     responseFields: []
@@ -555,8 +855,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Actualizar compania parcialmente.'
+      description: 'En PATCH solo se envian los campos que se quieren cambiar.'
       authenticated: true
       deprecated: false
     headers:
@@ -579,8 +879,44 @@ endpoints:
       id: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre de la compania.'
+        required: false
+        example: 'Tech Actualizada'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      direccion:
+        custom: []
+        name: direccion
+        description: 'Direccion de la compania.'
+        required: false
+        example: 'Carrera 10 # 20-30'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      telefono:
+        custom: []
+        name: telefono
+        description: 'Telefono de contacto.'
+        required: false
+        example: '3101234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: 'Tech Actualizada'
+      direccion: 'Carrera 10 # 20-30'
+      telefono: '3101234567'
     fileParameters: []
     responses: []
     responseFields: []
@@ -693,7 +1029,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Crear empleado.'
       description: ''
       authenticated: true
       deprecated: false
@@ -705,8 +1041,80 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre del empleado.'
+        required: true
+        example: Ana
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      apellido:
+        custom: []
+        name: apellido
+        description: 'Apellido del empleado.'
+        required: true
+        example: Gomez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      correo:
+        custom: []
+        name: correo
+        description: 'Correo unico del empleado.'
+        required: true
+        example: ana.gomez@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      cargo:
+        custom: []
+        name: cargo
+        description: 'Cargo del empleado.'
+        required: true
+        example: Desarrolladora
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      salario:
+        custom: []
+        name: salario
+        description: 'Salario positivo.'
+        required: true
+        example: 3500000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      compania_id:
+        custom: []
+        name: compania_id
+        description: 'ID de la compania existente.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: Ana
+      apellido: Gomez
+      correo: ana.gomez@example.com
+      cargo: Desarrolladora
+      salario: 3500000.0
+      compania_id: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -728,7 +1136,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Eliminar empleados masivamente.'
       description: ''
       authenticated: true
       deprecated: false
@@ -740,8 +1148,26 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      ids:
+        custom: []
+        name: ids
+        description: 'IDs de empleados existentes.'
+        required: true
+        example:
+          - 1
+          - 2
+          - 3
+        type: 'integer[]'
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      ids:
+        - 1
+        - 2
+        - 3
     fileParameters: []
     responses: []
     responseFields: []
@@ -763,7 +1189,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Crear empleados masivamente.'
       description: ''
       authenticated: true
       deprecated: false
@@ -775,8 +1201,88 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      empleados:
+        custom: []
+        name: empleados
+        description: 'Lista de empleados a crear en una sola transaccion.'
+        required: true
+        example:
+          - architecto
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'empleados[].nombre':
+        custom: []
+        name: 'empleados[].nombre'
+        description: 'Nombre del empleado.'
+        required: true
+        example: Ana
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].apellido':
+        custom: []
+        name: 'empleados[].apellido'
+        description: 'Apellido del empleado.'
+        required: true
+        example: Gomez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].correo':
+        custom: []
+        name: 'empleados[].correo'
+        description: 'Correo unico del empleado.'
+        required: true
+        example: ana.bulk@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].cargo':
+        custom: []
+        name: 'empleados[].cargo'
+        description: 'Cargo del empleado.'
+        required: true
+        example: Dev
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].salario':
+        custom: []
+        name: 'empleados[].salario'
+        description: 'Salario positivo.'
+        required: true
+        example: 3500000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      'empleados[].compania_id':
+        custom: []
+        name: 'empleados[].compania_id'
+        description: 'ID de la compania existente.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      empleados:
+        - architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -798,7 +1304,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Crear empleado asincronicamente.'
       description: ''
       authenticated: true
       deprecated: false
@@ -810,8 +1316,80 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre del empleado.'
+        required: true
+        example: Laura
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      apellido:
+        custom: []
+        name: apellido
+        description: 'Apellido del empleado.'
+        required: true
+        example: Perez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      correo:
+        custom: []
+        name: correo
+        description: 'Correo unico del empleado.'
+        required: true
+        example: laura.async@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      cargo:
+        custom: []
+        name: cargo
+        description: 'Cargo del empleado.'
+        required: true
+        example: Dev
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      salario:
+        custom: []
+        name: salario
+        description: 'Salario positivo.'
+        required: true
+        example: 3500000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      compania_id:
+        custom: []
+        name: compania_id
+        description: 'ID de la compania existente.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: Laura
+      apellido: Perez
+      correo: laura.async@example.com
+      cargo: Dev
+      salario: 3500000.0
+      compania_id: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -889,7 +1467,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
+      title: 'Actualizar empleado completo.'
       description: ''
       authenticated: true
       deprecated: false
@@ -913,8 +1491,80 @@ endpoints:
       id: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre del empleado.'
+        required: true
+        example: Ana
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      apellido:
+        custom: []
+        name: apellido
+        description: 'Apellido del empleado.'
+        required: true
+        example: Gomez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      correo:
+        custom: []
+        name: correo
+        description: 'Correo unico del empleado.'
+        required: true
+        example: ana.update@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      cargo:
+        custom: []
+        name: cargo
+        description: 'Cargo del empleado.'
+        required: true
+        example: 'Lider tecnico'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      salario:
+        custom: []
+        name: salario
+        description: 'Salario positivo.'
+        required: true
+        example: 4200000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      compania_id:
+        custom: []
+        name: compania_id
+        description: 'ID de la compania existente.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: Ana
+      apellido: Gomez
+      correo: ana.update@example.com
+      cargo: 'Lider tecnico'
+      salario: 4200000.0
+      compania_id: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -936,8 +1586,8 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Actualizar empleado parcialmente.'
+      description: 'En PATCH solo se envian los campos que se quieren cambiar.'
       authenticated: true
       deprecated: false
     headers:
@@ -960,8 +1610,80 @@ endpoints:
       id: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      nombre:
+        custom: []
+        name: nombre
+        description: 'Nombre del empleado.'
+        required: false
+        example: Ana
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      apellido:
+        custom: []
+        name: apellido
+        description: 'Apellido del empleado.'
+        required: false
+        example: Gomez
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      correo:
+        custom: []
+        name: correo
+        description: 'Correo unico del empleado.'
+        required: false
+        example: ana.patch@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      cargo:
+        custom: []
+        name: cargo
+        description: 'Cargo del empleado.'
+        required: false
+        example: 'Lider QA'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      salario:
+        custom: []
+        name: salario
+        description: 'Salario positivo.'
+        required: false
+        example: 5200000.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      compania_id:
+        custom: []
+        name: compania_id
+        description: 'ID de la compania existente.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      nombre: Ana
+      apellido: Gomez
+      correo: ana.patch@example.com
+      cargo: 'Lider QA'
+      salario: 5200000.0
+      compania_id: 1
     fileParameters: []
     responses: []
     responseFields: []

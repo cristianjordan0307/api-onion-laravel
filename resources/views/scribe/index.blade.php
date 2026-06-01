@@ -84,16 +84,16 @@
                                 <a href="#endpoints-GETapi-companias">GET api/companias</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-companias">
-                                <a href="#endpoints-POSTapi-companias">POST api/companias</a>
+                                <a href="#endpoints-POSTapi-companias">Crear compania.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-companias">
-                                <a href="#endpoints-DELETEapi-companias">DELETE api/companias</a>
+                                <a href="#endpoints-DELETEapi-companias">Eliminar companias masivamente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-companias-con-empleados">
-                                <a href="#endpoints-POSTapi-companias-con-empleados">POST api/companias/con-empleados</a>
+                                <a href="#endpoints-POSTapi-companias-con-empleados">Crear compania con empleados.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-companias-con-empleados-async">
-                                <a href="#endpoints-POSTapi-companias-con-empleados-async">POST api/companias/con-empleados/async</a>
+                                <a href="#endpoints-POSTapi-companias-con-empleados-async">Crear compania con empleados asincronicamente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-companias--id-">
                                 <a href="#endpoints-GETapi-companias--id-">GET api/companias/{id}</a>
@@ -102,10 +102,10 @@
                                 <a href="#endpoints-GETapi-companias--id--empleados">GET api/companias/{id}/empleados</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PUTapi-companias--id-">
-                                <a href="#endpoints-PUTapi-companias--id-">PUT api/companias/{id}</a>
+                                <a href="#endpoints-PUTapi-companias--id-">Actualizar compania completa.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-companias--id-">
-                                <a href="#endpoints-PATCHapi-companias--id-">PATCH api/companias/{id}</a>
+                                <a href="#endpoints-PATCHapi-companias--id-">Actualizar compania parcialmente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-companias--id-">
                                 <a href="#endpoints-DELETEapi-companias--id-">DELETE api/companias/{id}</a>
@@ -114,25 +114,25 @@
                                 <a href="#endpoints-GETapi-empleados">GET api/empleados</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-empleados">
-                                <a href="#endpoints-POSTapi-empleados">POST api/empleados</a>
+                                <a href="#endpoints-POSTapi-empleados">Crear empleado.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-empleados">
-                                <a href="#endpoints-DELETEapi-empleados">DELETE api/empleados</a>
+                                <a href="#endpoints-DELETEapi-empleados">Eliminar empleados masivamente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-empleados-bulk">
-                                <a href="#endpoints-POSTapi-empleados-bulk">POST api/empleados/bulk</a>
+                                <a href="#endpoints-POSTapi-empleados-bulk">Crear empleados masivamente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-empleados-async">
-                                <a href="#endpoints-POSTapi-empleados-async">POST api/empleados/async</a>
+                                <a href="#endpoints-POSTapi-empleados-async">Crear empleado asincronicamente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-empleados--id-">
                                 <a href="#endpoints-GETapi-empleados--id-">GET api/empleados/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PUTapi-empleados--id-">
-                                <a href="#endpoints-PUTapi-empleados--id-">PUT api/empleados/{id}</a>
+                                <a href="#endpoints-PUTapi-empleados--id-">Actualizar empleado completo.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-empleados--id-">
-                                <a href="#endpoints-PATCHapi-empleados--id-">PATCH api/empleados/{id}</a>
+                                <a href="#endpoints-PATCHapi-empleados--id-">Actualizar empleado parcialmente.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-empleados--id-">
                                 <a href="#endpoints-DELETEapi-empleados--id-">DELETE api/empleados/{id}</a>
@@ -148,7 +148,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 29, 2026</li>
+        <li>Last updated: June 1, 2026</li>
     </ul>
 </div>
 
@@ -823,7 +823,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-companias">POST api/companias</h2>
+                    <h2 id="endpoints-POSTapi-companias">Crear compania.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -840,7 +840,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Tech Solutions\",
+    \"direccion\": \"Calle 1 # 2-3\",
+    \"telefono\": \"3001234567\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -854,10 +860,16 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Tech Solutions",
+    "direccion": "Calle 1 # 2-3",
+    "telefono": "3001234567"
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -947,9 +959,46 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-companias"
+               value="Tech Solutions"
+               data-component="body">
+    <br>
+<p>Nombre de la compania. Example: <code>Tech Solutions</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>direccion</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="direccion"                data-endpoint="POSTapi-companias"
+               value="Calle 1 # 2-3"
+               data-component="body">
+    <br>
+<p>Direccion de la compania. Example: <code>Calle 1 # 2-3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>telefono</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="telefono"                data-endpoint="POSTapi-companias"
+               value="3001234567"
+               data-component="body">
+    <br>
+<p>Telefono de contacto. Example: <code>3001234567</code></p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-DELETEapi-companias">DELETE api/companias</h2>
+                    <h2 id="endpoints-DELETEapi-companias">Eliminar companias masivamente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -966,7 +1015,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"ids\": [
+        1,
+        2,
+        3
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -980,10 +1037,18 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "ids": [
+        1,
+        2,
+        3
+    ]
+};
 
 fetch(url, {
     method: "DELETE",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1073,15 +1138,30 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="ids[0]"                data-endpoint="DELETEapi-companias"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="ids[1]"                data-endpoint="DELETEapi-companias"
+               data-component="body">
+    <br>
+<p>IDs de companias existentes.</p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-POSTapi-companias-con-empleados">POST api/companias/con-empleados</h2>
+                    <h2 id="endpoints-POSTapi-companias-con-empleados">Crear compania con empleados.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>Crea la compania y sus empleados dentro de una sola transaccion.</p>
 
 <span id="example-requests-POSTapi-companias-con-empleados">
 <blockquote>Example request:</blockquote>
@@ -1092,7 +1172,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Empresa Demo\",
+    \"direccion\": \"Calle 20 # 30-40\",
+    \"telefono\": \"3009876543\",
+    \"empleados\": [
+        \"architecto\"
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1106,10 +1195,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Empresa Demo",
+    "direccion": "Calle 20 # 30-40",
+    "telefono": "3009876543",
+    "empleados": [
+        "architecto"
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1199,15 +1297,124 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-companias-con-empleados"
+               value="Empresa Demo"
+               data-component="body">
+    <br>
+<p>Nombre de la compania. Example: <code>Empresa Demo</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>direccion</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="direccion"                data-endpoint="POSTapi-companias-con-empleados"
+               value="Calle 20 # 30-40"
+               data-component="body">
+    <br>
+<p>Direccion de la compania. Example: <code>Calle 20 # 30-40</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>telefono</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="telefono"                data-endpoint="POSTapi-companias-con-empleados"
+               value="3009876543"
+               data-component="body">
+    <br>
+<p>Telefono de contacto. Example: <code>3009876543</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>empleados</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Lista de empleados de la compania.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.nombre"                data-endpoint="POSTapi-companias-con-empleados"
+               value="Ana"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Ana</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.apellido"                data-endpoint="POSTapi-companias-con-empleados"
+               value="Gomez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Gomez</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.correo"                data-endpoint="POSTapi-companias-con-empleados"
+               value="ana.demo@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>ana.demo@example.com</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.cargo"                data-endpoint="POSTapi-companias-con-empleados"
+               value="Dev"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Dev</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="empleados.0.salario"                data-endpoint="POSTapi-companias-con-empleados"
+               value="3500000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>3500000</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-POSTapi-companias-con-empleados-async">POST api/companias/con-empleados/async</h2>
+                    <h2 id="endpoints-POSTapi-companias-con-empleados-async">Crear compania con empleados asincronicamente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>Encola la creacion transaccional para que la procese un worker.</p>
 
 <span id="example-requests-POSTapi-companias-con-empleados-async">
 <blockquote>Example request:</blockquote>
@@ -1218,7 +1425,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias/con-empleados/async" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Empresa Async\",
+    \"direccion\": \"Calle 50 # 10-20\",
+    \"telefono\": \"3005556677\",
+    \"empleados\": [
+        \"architecto\"
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1232,10 +1448,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Empresa Async",
+    "direccion": "Calle 50 # 10-20",
+    "telefono": "3005556677",
+    "empleados": [
+        "architecto"
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1325,7 +1550,116 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="Empresa Async"
+               data-component="body">
+    <br>
+<p>Nombre de la compania. Example: <code>Empresa Async</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>direccion</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="direccion"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="Calle 50 # 10-20"
+               data-component="body">
+    <br>
+<p>Direccion de la compania. Example: <code>Calle 50 # 10-20</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>telefono</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="telefono"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="3005556677"
+               data-component="body">
+    <br>
+<p>Telefono de contacto. Example: <code>3005556677</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>empleados</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Lista de empleados de la compania.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.nombre"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="Carlos"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Carlos</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.apellido"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="Rojas"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Rojas</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.correo"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="carlos.async@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>carlos.async@example.com</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.cargo"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="QA"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>QA</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="empleados.0.salario"                data-endpoint="POSTapi-companias-con-empleados-async"
+               value="2800000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>2800000</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
 
                     <h2 id="endpoints-GETapi-companias--id-">GET api/companias/{id}</h2>
 
@@ -1637,7 +1971,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-PUTapi-companias--id-">PUT api/companias/{id}</h2>
+                    <h2 id="endpoints-PUTapi-companias--id-">Actualizar compania completa.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1654,7 +1988,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Tech Solutions\",
+    \"direccion\": \"Calle 1 # 2-3\",
+    \"telefono\": \"3001234567\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1668,10 +2008,16 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Tech Solutions",
+    "direccion": "Calle 1 # 2-3",
+    "telefono": "3001234567"
+};
 
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1774,15 +2120,52 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the compania. Example: <code>architecto</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="PUTapi-companias--id-"
+               value="Tech Solutions"
+               data-component="body">
+    <br>
+<p>Nombre de la compania. Example: <code>Tech Solutions</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>direccion</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="direccion"                data-endpoint="PUTapi-companias--id-"
+               value="Calle 1 # 2-3"
+               data-component="body">
+    <br>
+<p>Direccion de la compania. Example: <code>Calle 1 # 2-3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>telefono</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="telefono"                data-endpoint="PUTapi-companias--id-"
+               value="3001234567"
+               data-component="body">
+    <br>
+<p>Telefono de contacto. Example: <code>3001234567</code></p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-PATCHapi-companias--id-">PATCH api/companias/{id}</h2>
+                    <h2 id="endpoints-PATCHapi-companias--id-">Actualizar compania parcialmente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>En PATCH solo se envian los campos que se quieren cambiar.</p>
 
 <span id="example-requests-PATCHapi-companias--id-">
 <blockquote>Example request:</blockquote>
@@ -1793,7 +2176,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/companias/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Tech Actualizada\",
+    \"direccion\": \"Carrera 10 # 20-30\",
+    \"telefono\": \"3101234567\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -1807,10 +2196,16 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Tech Actualizada",
+    "direccion": "Carrera 10 # 20-30",
+    "telefono": "3101234567"
+};
 
 fetch(url, {
     method: "PATCH",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -1913,7 +2308,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the compania. Example: <code>architecto</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="PATCHapi-companias--id-"
+               value="Tech Actualizada"
+               data-component="body">
+    <br>
+<p>Nombre de la compania. Example: <code>Tech Actualizada</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>direccion</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="direccion"                data-endpoint="PATCHapi-companias--id-"
+               value="Carrera 10 # 20-30"
+               data-component="body">
+    <br>
+<p>Direccion de la compania. Example: <code>Carrera 10 # 20-30</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>telefono</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="telefono"                data-endpoint="PATCHapi-companias--id-"
+               value="3101234567"
+               data-component="body">
+    <br>
+<p>Telefono de contacto. Example: <code>3101234567</code></p>
+        </div>
+        </form>
 
                     <h2 id="endpoints-DELETEapi-companias--id-">DELETE api/companias/{id}</h2>
 
@@ -2196,7 +2628,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-empleados">POST api/empleados</h2>
+                    <h2 id="endpoints-POSTapi-empleados">Crear empleado.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2213,7 +2645,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Ana\",
+    \"apellido\": \"Gomez\",
+    \"correo\": \"ana.gomez@example.com\",
+    \"cargo\": \"Desarrolladora\",
+    \"salario\": 3500000,
+    \"compania_id\": 1
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2227,10 +2668,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Ana",
+    "apellido": "Gomez",
+    "correo": "ana.gomez@example.com",
+    "cargo": "Desarrolladora",
+    "salario": 3500000,
+    "compania_id": 1
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2320,9 +2770,82 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-empleados"
+               value="Ana"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Ana</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apellido"                data-endpoint="POSTapi-empleados"
+               value="Gomez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Gomez</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="correo"                data-endpoint="POSTapi-empleados"
+               value="ana.gomez@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>ana.gomez@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cargo"                data-endpoint="POSTapi-empleados"
+               value="Desarrolladora"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Desarrolladora</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="salario"                data-endpoint="POSTapi-empleados"
+               value="3500000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>3500000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>compania_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="compania_id"                data-endpoint="POSTapi-empleados"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID de la compania existente. Example: <code>1</code></p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-DELETEapi-empleados">DELETE api/empleados</h2>
+                    <h2 id="endpoints-DELETEapi-empleados">Eliminar empleados masivamente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2339,7 +2862,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"ids\": [
+        1,
+        2,
+        3
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2353,10 +2884,18 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "ids": [
+        1,
+        2,
+        3
+    ]
+};
 
 fetch(url, {
     method: "DELETE",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2446,9 +2985,24 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>ids</code></b>&nbsp;&nbsp;
+<small>integer[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="ids[0]"                data-endpoint="DELETEapi-empleados"
+               data-component="body">
+        <input type="number" style="display: none"
+               name="ids[1]"                data-endpoint="DELETEapi-empleados"
+               data-component="body">
+    <br>
+<p>IDs de empleados existentes.</p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-POSTapi-empleados-bulk">POST api/empleados/bulk</h2>
+                    <h2 id="endpoints-POSTapi-empleados-bulk">Crear empleados masivamente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2465,7 +3019,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados/bulk" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"empleados\": [
+        \"architecto\"
+    ]
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2479,10 +3039,16 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "empleados": [
+        "architecto"
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2572,9 +3138,94 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>empleados</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Lista de empleados a crear en una sola transaccion.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.nombre"                data-endpoint="POSTapi-empleados-bulk"
+               value="Ana"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Ana</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.apellido"                data-endpoint="POSTapi-empleados-bulk"
+               value="Gomez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Gomez</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.correo"                data-endpoint="POSTapi-empleados-bulk"
+               value="ana.bulk@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>ana.bulk@example.com</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="empleados.0.cargo"                data-endpoint="POSTapi-empleados-bulk"
+               value="Dev"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Dev</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="empleados.0.salario"                data-endpoint="POSTapi-empleados-bulk"
+               value="3500000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>3500000</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>compania_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="empleados.0.compania_id"                data-endpoint="POSTapi-empleados-bulk"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID de la compania existente. Example: <code>1</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-POSTapi-empleados-async">POST api/empleados/async</h2>
+                    <h2 id="endpoints-POSTapi-empleados-async">Crear empleado asincronicamente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2591,7 +3242,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados/async" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Laura\",
+    \"apellido\": \"Perez\",
+    \"correo\": \"laura.async@example.com\",
+    \"cargo\": \"Dev\",
+    \"salario\": 3500000,
+    \"compania_id\": 1
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2605,10 +3265,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Laura",
+    "apellido": "Perez",
+    "correo": "laura.async@example.com",
+    "cargo": "Dev",
+    "salario": 3500000,
+    "compania_id": 1
+};
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2698,7 +3367,80 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="POSTapi-empleados-async"
+               value="Laura"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Laura</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apellido"                data-endpoint="POSTapi-empleados-async"
+               value="Perez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Perez</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="correo"                data-endpoint="POSTapi-empleados-async"
+               value="laura.async@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>laura.async@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cargo"                data-endpoint="POSTapi-empleados-async"
+               value="Dev"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Dev</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="salario"                data-endpoint="POSTapi-empleados-async"
+               value="3500000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>3500000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>compania_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="compania_id"                data-endpoint="POSTapi-empleados-async"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID de la compania existente. Example: <code>1</code></p>
+        </div>
+        </form>
 
                     <h2 id="endpoints-GETapi-empleados--id-">GET api/empleados/{id}</h2>
 
@@ -2855,7 +3597,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-PUTapi-empleados--id-">PUT api/empleados/{id}</h2>
+                    <h2 id="endpoints-PUTapi-empleados--id-">Actualizar empleado completo.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -2872,7 +3614,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Ana\",
+    \"apellido\": \"Gomez\",
+    \"correo\": \"ana.update@example.com\",
+    \"cargo\": \"Lider tecnico\",
+    \"salario\": 4200000,
+    \"compania_id\": 1
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -2886,10 +3637,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Ana",
+    "apellido": "Gomez",
+    "correo": "ana.update@example.com",
+    "cargo": "Lider tecnico",
+    "salario": 4200000,
+    "compania_id": 1
+};
 
 fetch(url, {
     method: "PUT",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -2992,15 +3752,88 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the empleado. Example: <code>architecto</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="PUTapi-empleados--id-"
+               value="Ana"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Ana</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apellido"                data-endpoint="PUTapi-empleados--id-"
+               value="Gomez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Gomez</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="correo"                data-endpoint="PUTapi-empleados--id-"
+               value="ana.update@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>ana.update@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cargo"                data-endpoint="PUTapi-empleados--id-"
+               value="Lider tecnico"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Lider tecnico</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="salario"                data-endpoint="PUTapi-empleados--id-"
+               value="4200000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>4200000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>compania_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="compania_id"                data-endpoint="PUTapi-empleados--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID de la compania existente. Example: <code>1</code></p>
+        </div>
+        </form>
 
-                    <h2 id="endpoints-PATCHapi-empleados--id-">PATCH api/empleados/{id}</h2>
+                    <h2 id="endpoints-PATCHapi-empleados--id-">Actualizar empleado parcialmente.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-
+<p>En PATCH solo se envian los campos que se quieren cambiar.</p>
 
 <span id="example-requests-PATCHapi-empleados--id-">
 <blockquote>Example request:</blockquote>
@@ -3011,7 +3844,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "https://api-onion-laravel-production.up.railway.app/api/empleados/architecto" \
     --header "Authorization: Bearer {TOKEN_JWT}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"nombre\": \"Ana\",
+    \"apellido\": \"Gomez\",
+    \"correo\": \"ana.patch@example.com\",
+    \"cargo\": \"Lider QA\",
+    \"salario\": 5200000,
+    \"compania_id\": 1
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
@@ -3025,10 +3867,19 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "nombre": "Ana",
+    "apellido": "Gomez",
+    "correo": "ana.patch@example.com",
+    "cargo": "Lider QA",
+    "salario": 5200000,
+    "compania_id": 1
+};
 
 fetch(url, {
     method: "PATCH",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
@@ -3131,7 +3982,80 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The ID of the empleado. Example: <code>architecto</code></p>
             </div>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>nombre</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="nombre"                data-endpoint="PATCHapi-empleados--id-"
+               value="Ana"
+               data-component="body">
+    <br>
+<p>Nombre del empleado. Example: <code>Ana</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apellido</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apellido"                data-endpoint="PATCHapi-empleados--id-"
+               value="Gomez"
+               data-component="body">
+    <br>
+<p>Apellido del empleado. Example: <code>Gomez</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="correo"                data-endpoint="PATCHapi-empleados--id-"
+               value="ana.patch@example.com"
+               data-component="body">
+    <br>
+<p>Correo unico del empleado. Example: <code>ana.patch@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cargo</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cargo"                data-endpoint="PATCHapi-empleados--id-"
+               value="Lider QA"
+               data-component="body">
+    <br>
+<p>Cargo del empleado. Example: <code>Lider QA</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>salario</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="salario"                data-endpoint="PATCHapi-empleados--id-"
+               value="5200000"
+               data-component="body">
+    <br>
+<p>Salario positivo. Example: <code>5200000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>compania_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="compania_id"                data-endpoint="PATCHapi-empleados--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID de la compania existente. Example: <code>1</code></p>
+        </div>
+        </form>
 
                     <h2 id="endpoints-DELETEapi-empleados--id-">DELETE api/empleados/{id}</h2>
 

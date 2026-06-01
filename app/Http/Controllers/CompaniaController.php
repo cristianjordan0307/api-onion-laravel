@@ -65,6 +65,13 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Crear compania.
+     *
+     * @bodyParam nombre string required Nombre de la compania. Example: Tech Solutions
+     * @bodyParam direccion string required Direccion de la compania. Example: Calle 1 # 2-3
+     * @bodyParam telefono string required Telefono de contacto. Example: 3001234567
+     */
     public function store(Request $request): JsonResponse
     {
         try {
@@ -80,6 +87,13 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Actualizar compania completa.
+     *
+     * @bodyParam nombre string required Nombre de la compania. Example: Tech Solutions
+     * @bodyParam direccion string required Direccion de la compania. Example: Calle 1 # 2-3
+     * @bodyParam telefono string required Telefono de contacto. Example: 3001234567
+     */
     public function update(Request $request, int $id): JsonResponse
     {
         try {
@@ -99,6 +113,15 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Actualizar compania parcialmente.
+     *
+     * En PATCH solo se envian los campos que se quieren cambiar.
+     *
+     * @bodyParam nombre string Nombre de la compania. Example: Tech Actualizada
+     * @bodyParam direccion string Direccion de la compania. Example: Carrera 10 # 20-30
+     * @bodyParam telefono string Telefono de contacto. Example: 3101234567
+     */
     public function patch(Request $request, int $id): JsonResponse
     {
         try {
@@ -139,6 +162,11 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Eliminar companias masivamente.
+     *
+     * @bodyParam ids integer[] required IDs de companias existentes. Example: [1,2,3]
+     */
     public function destroyMany(Request $request): JsonResponse
     {
         try {
@@ -161,6 +189,21 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Crear compania con empleados.
+     *
+     * Crea la compania y sus empleados dentro de una sola transaccion.
+     *
+     * @bodyParam nombre string required Nombre de la compania. Example: Empresa Demo
+     * @bodyParam direccion string required Direccion de la compania. Example: Calle 20 # 30-40
+     * @bodyParam telefono string required Telefono de contacto. Example: 3009876543
+     * @bodyParam empleados array required Lista de empleados de la compania.
+     * @bodyParam empleados[].nombre string required Nombre del empleado. Example: Ana
+     * @bodyParam empleados[].apellido string required Apellido del empleado. Example: Gomez
+     * @bodyParam empleados[].correo string required Correo unico del empleado. Example: ana.demo@example.com
+     * @bodyParam empleados[].cargo string required Cargo del empleado. Example: Dev
+     * @bodyParam empleados[].salario number required Salario positivo. Example: 3500000
+     */
     public function storeConEmpleados(Request $request): JsonResponse
     {
         try {
@@ -176,6 +219,21 @@ class CompaniaController extends Controller
         }
     }
 
+    /**
+     * Crear compania con empleados asincronicamente.
+     *
+     * Encola la creacion transaccional para que la procese un worker.
+     *
+     * @bodyParam nombre string required Nombre de la compania. Example: Empresa Async
+     * @bodyParam direccion string required Direccion de la compania. Example: Calle 50 # 10-20
+     * @bodyParam telefono string required Telefono de contacto. Example: 3005556677
+     * @bodyParam empleados array required Lista de empleados de la compania.
+     * @bodyParam empleados[].nombre string required Nombre del empleado. Example: Carlos
+     * @bodyParam empleados[].apellido string required Apellido del empleado. Example: Rojas
+     * @bodyParam empleados[].correo string required Correo unico del empleado. Example: carlos.async@example.com
+     * @bodyParam empleados[].cargo string required Cargo del empleado. Example: QA
+     * @bodyParam empleados[].salario number required Salario positivo. Example: 2800000
+     */
     public function storeConEmpleadosAsync(Request $request): JsonResponse
     {
         try {

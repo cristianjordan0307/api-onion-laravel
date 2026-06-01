@@ -52,6 +52,16 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Crear empleado.
+     *
+     * @bodyParam nombre string required Nombre del empleado. Example: Ana
+     * @bodyParam apellido string required Apellido del empleado. Example: Gomez
+     * @bodyParam correo string required Correo unico del empleado. Example: ana.gomez@example.com
+     * @bodyParam cargo string required Cargo del empleado. Example: Desarrolladora
+     * @bodyParam salario number required Salario positivo. Example: 3500000
+     * @bodyParam compania_id integer required ID de la compania existente. Example: 1
+     */
     public function store(Request $request): JsonResponse
     {
         try {
@@ -68,6 +78,17 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Crear empleados masivamente.
+     *
+     * @bodyParam empleados array required Lista de empleados a crear en una sola transaccion.
+     * @bodyParam empleados[].nombre string required Nombre del empleado. Example: Ana
+     * @bodyParam empleados[].apellido string required Apellido del empleado. Example: Gomez
+     * @bodyParam empleados[].correo string required Correo unico del empleado. Example: ana.bulk@example.com
+     * @bodyParam empleados[].cargo string required Cargo del empleado. Example: Dev
+     * @bodyParam empleados[].salario number required Salario positivo. Example: 3500000
+     * @bodyParam empleados[].compania_id integer required ID de la compania existente. Example: 1
+     */
     public function storeBulk(Request $request): JsonResponse
     {
         try {
@@ -91,6 +112,16 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Crear empleado asincronicamente.
+     *
+     * @bodyParam nombre string required Nombre del empleado. Example: Laura
+     * @bodyParam apellido string required Apellido del empleado. Example: Perez
+     * @bodyParam correo string required Correo unico del empleado. Example: laura.async@example.com
+     * @bodyParam cargo string required Cargo del empleado. Example: Dev
+     * @bodyParam salario number required Salario positivo. Example: 3500000
+     * @bodyParam compania_id integer required ID de la compania existente. Example: 1
+     */
     public function storeAsync(Request $request): JsonResponse
     {
         try {
@@ -112,6 +143,16 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Actualizar empleado completo.
+     *
+     * @bodyParam nombre string required Nombre del empleado. Example: Ana
+     * @bodyParam apellido string required Apellido del empleado. Example: Gomez
+     * @bodyParam correo string required Correo unico del empleado. Example: ana.update@example.com
+     * @bodyParam cargo string required Cargo del empleado. Example: Lider tecnico
+     * @bodyParam salario number required Salario positivo. Example: 4200000
+     * @bodyParam compania_id integer required ID de la compania existente. Example: 1
+     */
     public function update(Request $request, int $id): JsonResponse
     {
         try {
@@ -136,6 +177,18 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Actualizar empleado parcialmente.
+     *
+     * En PATCH solo se envian los campos que se quieren cambiar.
+     *
+     * @bodyParam nombre string Nombre del empleado. Example: Ana
+     * @bodyParam apellido string Apellido del empleado. Example: Gomez
+     * @bodyParam correo string Correo unico del empleado. Example: ana.patch@example.com
+     * @bodyParam cargo string Cargo del empleado. Example: Lider QA
+     * @bodyParam salario number Salario positivo. Example: 5200000
+     * @bodyParam compania_id integer ID de la compania existente. Example: 1
+     */
     public function patch(Request $request, int $id): JsonResponse
     {
         try {
@@ -189,6 +242,11 @@ class EmpleadoController extends Controller
         }
     }
 
+    /**
+     * Eliminar empleados masivamente.
+     *
+     * @bodyParam ids integer[] required IDs de empleados existentes. Example: [1,2,3]
+     */
     public function destroyMany(Request $request): JsonResponse
     {
         try {
