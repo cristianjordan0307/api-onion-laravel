@@ -7,6 +7,7 @@ const EMPTY = { nombre: '', direccion: '', telefono: '' }
 
 export default function CompaniasPage() {
   const can = useAuthStore((s) => s.can)
+  const user = useAuthStore((s) => s.user)
   const [data, setData]     = useState([])
   const [pag, setPag]       = useState({ pagina_actual: 1, total: 0, ultima_pagina: 1 })
   const [page, setPage]     = useState(1)
@@ -129,12 +130,12 @@ export default function CompaniasPage() {
                     </td>
                     <td>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        {can('companias:update') && (
+                        {(user?.role === 'ADMIN' || (can('companias:update') && user?.compania_id === c.id)) && (
                           <button className="btn-icon" onClick={() => openEdit(c)} title="Editar">
                             <Pencil size={15} />
                           </button>
                         )}
-                        {can('companias:delete') && (
+                        {(user?.role === 'ADMIN' || (can('companias:delete') && user?.compania_id === c.id)) && (
                           <button className="btn-icon" onClick={() => openDelete(c)} title="Eliminar"
                             style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.1)' }}>
                             <Trash2 size={15} />

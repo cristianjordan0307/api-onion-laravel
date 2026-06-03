@@ -44,7 +44,10 @@ class CompaniaPolicy
      */
     public function update(User $user, Compania $compania): bool
     {
-        return in_array($user->role, ['ADMIN_BOG', 'ADMIN_MED']);
+        if (!in_array($user->role, ['ADMIN_BOG', 'ADMIN_MED'])) {
+            return false;
+        }
+        return (int) $user->compania_id === (int) $compania->id;
     }
 
     /**
@@ -52,7 +55,10 @@ class CompaniaPolicy
      */
     public function patch(User $user, Compania $compania): bool
     {
-        return $user->role === 'ADMIN_BOG';
+        if ($user->role !== 'ADMIN_BOG') {
+            return false;
+        }
+        return (int) $user->compania_id === (int) $compania->id;
     }
 
     /**
@@ -60,7 +66,10 @@ class CompaniaPolicy
      */
     public function delete(User $user, Compania $compania): bool
     {
-        return $user->role === 'ADMIN_MED';
+        if ($user->role !== 'ADMIN_MED') {
+            return false;
+        }
+        return (int) $user->compania_id === (int) $compania->id;
     }
 
     /**

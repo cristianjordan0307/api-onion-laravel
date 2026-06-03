@@ -7,6 +7,7 @@ const EMPTY = { nombre: '', apellido: '', correo: '', cargo: '', salario: '', co
 
 export default function EmpleadosPage() {
   const can = useAuthStore((s) => s.can)
+  const user = useAuthStore((s) => s.user)
   const [data, setData]     = useState([])
   const [companias, setCompanias] = useState([])
   const [pag, setPag]       = useState({ pagina_actual: 1, total: 0, ultima_pagina: 1 })
@@ -146,12 +147,12 @@ export default function EmpleadosPage() {
                     <td style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>#{e.compania_id}</td>
                     <td>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        {can('empleados:update') && (
+                        {(user?.role === 'ADMIN' || (can('empleados:update') && user?.compania_id === e.compania_id)) && (
                           <button className="btn-icon" onClick={() => openEdit(e)} title="Editar">
                             <Pencil size={15} />
                           </button>
                         )}
-                        {can('empleados:delete') && (
+                        {(user?.role === 'ADMIN' || (can('empleados:delete') && user?.compania_id === e.compania_id)) && (
                           <button className="btn-icon" onClick={() => openDelete(e)} title="Eliminar"
                             style={{ color: 'var(--danger)', borderColor: 'rgba(239, 68, 68, 0.1)' }}>
                             <Trash2 size={15} />
