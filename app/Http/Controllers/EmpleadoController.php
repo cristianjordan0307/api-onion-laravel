@@ -196,7 +196,7 @@ class EmpleadoController extends Controller
             if (!$empleadoModel) {
                 return response()->json(['error' => 'Empleado no encontrado.'], 404);
             }
-            Gate::authorize('update', $empleadoModel);
+            Gate::authorize('patch', $empleadoModel);
 
             $validated = $request->validate([
                 'nombre' => 'sometimes|required|string|max:100',
@@ -212,7 +212,7 @@ class EmpleadoController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            return response()->json(['error' => 'No autorizado para modificar este empleado.'], 403);
+            return response()->json(['error' => 'No autorizado para hacer PATCH en este empleado.'], 403);
         } catch (\Exception $e) {
             Log::error('[EmpleadoController] Error en patch: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
@@ -250,6 +250,8 @@ class EmpleadoController extends Controller
     public function destroyMany(Request $request): JsonResponse
     {
         try {
+            Gate::authorize('deleteMany', Empleado::class);
+
             $validated = $request->validate([
                 'ids' => 'required|array|min:1',
                 'ids.*' => 'required|integer|exists:empleados,id',
@@ -261,6 +263,8 @@ class EmpleadoController extends Controller
                 'mensaje' => 'Empleados eliminados.',
                 'eliminados' => $deleted,
             ], 200);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para eliminar empleados masivamente.'], 403);
         } catch (\Exception $e) {
             Log::error('[EmpleadoController] Error en destroyMany: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);

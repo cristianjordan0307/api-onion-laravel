@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Application\DTOs\CompaniaDTO;
 use App\Application\Services\CompaniaService;
 use App\Jobs\CrearCompaniaConEmpleadosJob;
+use App\Models\Compania;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class CompaniaController extends Controller
@@ -75,12 +77,16 @@ class CompaniaController extends Controller
     public function store(Request $request): JsonResponse
     {
         try {
+            Gate::authorize('create', Compania::class);
+
             $validated = $request->validate($this->rules());
 
             return response()->json($this->service->create(CompaniaDTO::fromRequest($validated)), 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para crear companias.'], 403);
         } catch (\Exception $e) {
             Log::error('[CompaniaController] Error en store: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
@@ -97,6 +103,9 @@ class CompaniaController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         try {
+            $companiaModel = Compania::findOrFail($id);
+            Gate::authorize('update', $companiaModel);
+
             $validated = $request->validate($this->rules());
             $compania = $this->service->update($id, CompaniaDTO::fromRequest($validated));
 
@@ -107,6 +116,8 @@ class CompaniaController extends Controller
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para actualizar esta compania.'], 403);
         } catch (\Exception $e) {
             Log::error('[CompaniaController] Error en update: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
@@ -125,6 +136,9 @@ class CompaniaController extends Controller
     public function patch(Request $request, int $id): JsonResponse
     {
         try {
+            $companiaModel = Compania::findOrFail($id);
+            Gate::authorize('patch', $companiaModel);
+
             $validated = $request->validate([
                 'nombre' => 'sometimes|required|string|max:150',
                 'direccion' => 'sometimes|required|string|max:255',
@@ -140,6 +154,8 @@ class CompaniaController extends Controller
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para hacer PATCH en esta compania.'], 403);
         } catch (\Exception $e) {
             Log::error('[CompaniaController] Error en patch: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
@@ -149,6 +165,9 @@ class CompaniaController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
+            $companiaModel = Compania::findOrFail($id);
+            Gate::authorize('delete', $companiaModel);
+
             $result = $this->service->delete($id);
             if (!$result) {
                 return response()->json(['error' => 'Compania no encontrada.'], 404);
@@ -156,6 +175,8 @@ class CompaniaController extends Controller
             return response()->json(null, 204);
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para eliminar esta compania.'], 403);
         } catch (\Exception $e) {
             Log::error('[CompaniaController] Error en destroy: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
@@ -170,6 +191,8 @@ class CompaniaController extends Controller
     public function destroyMany(Request $request): JsonResponse
     {
         try {
+            Gate::authorize('deleteMany', Compania::class);
+
             $validated = $request->validate([
                 'ids' => 'required|array|min:1',
                 'ids.*' => 'required|integer|exists:companias,id',
@@ -183,6 +206,8 @@ class CompaniaController extends Controller
             ], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
             throw $e;
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return response()->json(['error' => 'No autorizado para eliminar companias masivamente.'], 403);
         } catch (\Exception $e) {
             Log::error('[CompaniaController] Error en destroyMany: ' . $e->getMessage());
             return response()->json(['error' => 'Error interno del servidor.'], 500);
