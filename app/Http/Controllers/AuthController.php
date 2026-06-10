@@ -18,6 +18,9 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
             'role' => 'sometimes|string|in:ADMIN,USUARIO',
             'compania_id' => 'nullable|integer|exists:companias,id',
+            'ciudad' => 'nullable|string|max:80',
+            'permisos' => 'sometimes|array',
+            'permisos.*' => 'string|max:100',
         ]);
 
         return response()->json($this->service->registrar($validated), 201);

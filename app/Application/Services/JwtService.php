@@ -16,6 +16,8 @@ class JwtService
             'correo' => $user->email,
             'rol' => $user->role,
             'compania_id' => $user->compania_id,
+            'ciudad' => $user->ciudad,
+            'permisos' => $user->permisos ?? [],
             'iat' => Carbon::now()->timestamp,
             'exp' => Carbon::now()->addHours(8)->timestamp,
         ];

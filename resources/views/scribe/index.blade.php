@@ -71,7 +71,10 @@
                     <a href="#endpoints">Endpoints</a>
                 </li>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-registro">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-openapi-yaml">
+                                <a href="#endpoints-GETapi-openapi-yaml">GET api/openapi.yaml</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-registro">
                                 <a href="#endpoints-POSTapi-auth-registro">POST api/auth/registro</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-auth-login">
@@ -148,7 +151,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 1, 2026</li>
+        <li>Last updated: June 10, 2026</li>
     </ul>
 </div>
 
@@ -173,7 +176,148 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     
 
-                                <h2 id="endpoints-POSTapi-auth-registro">POST api/auth/registro</h2>
+                                <h2 id="endpoints-GETapi-openapi-yaml">GET api/openapi.yaml</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-openapi-yaml">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api-onion-laravel-production.up.railway.app/api/openapi.yaml" \
+    --header "Authorization: Bearer {TOKEN_JWT}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api-onion-laravel-production.up.railway.app/api/openapi.yaml"
+);
+
+const headers = {
+    "Authorization": "Bearer {TOKEN_JWT}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-openapi-yaml">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">content-type: application/yaml
+cache-control: public
+accept-ranges: bytes
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;"></code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-openapi-yaml" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-openapi-yaml"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-openapi-yaml"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-openapi-yaml" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-openapi-yaml">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-openapi-yaml" data-method="GET"
+      data-path="api/openapi.yaml"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-openapi-yaml', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-openapi-yaml"
+                    onclick="tryItOut('GETapi-openapi-yaml');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-openapi-yaml"
+                    onclick="cancelTryOut('GETapi-openapi-yaml');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-openapi-yaml"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/openapi.yaml</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-openapi-yaml"
+               value="Bearer {TOKEN_JWT}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {TOKEN_JWT}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-openapi-yaml"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-openapi-yaml"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-auth-registro">POST api/auth/registro</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -196,7 +340,11 @@ You can switch the language used with the tabs at the top right (or from the nav
     \"email\": \"zbailey@example.net\",
     \"password\": \"-0pBNvYgxw\",
     \"role\": \"USUARIO\",
-    \"compania_id\": 16
+    \"compania_id\": 16,
+    \"ciudad\": \"n\",
+    \"permisos\": [
+        \"g\"
+    ]
 }"
 </code></pre></div>
 
@@ -217,7 +365,11 @@ let body = {
     "email": "zbailey@example.net",
     "password": "-0pBNvYgxw",
     "role": "USUARIO",
-    "compania_id": 16
+    "compania_id": 16,
+    "ciudad": "n",
+    "permisos": [
+        "g"
+    ]
 };
 
 fetch(url, {
@@ -375,6 +527,32 @@ Must be one of:
                data-component="body">
     <br>
 <p>The <code>id</code> of an existing record in the companias table. Example: <code>16</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>ciudad</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="ciudad"                data-endpoint="POSTapi-auth-registro"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 80 characters. Example: <code>n</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>permisos</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="permisos[0]"                data-endpoint="POSTapi-auth-registro"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="permisos[1]"                data-endpoint="POSTapi-auth-registro"
+               data-component="body">
+    <br>
+<p>Must not be greater than 100 characters.</p>
         </div>
         </form>
 

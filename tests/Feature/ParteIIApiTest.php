@@ -143,6 +143,16 @@ class ParteIIApiTest extends TestCase
             'password' => Hash::make('secret123'),
             'role' => $role,
             'compania_id' => $companiaId,
+            'permisos' => [
+                'companias:leer',
+                'companias:crear',
+                'companias:actualizar',
+                'companias:eliminar',
+                'empleados:leer',
+                'empleados:crear',
+                'empleados:actualizar',
+                'empleados:eliminar',
+            ],
         ]);
 
         return app(JwtService::class)->generate($user);

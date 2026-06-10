@@ -22,6 +22,8 @@ class AuthService
             'password' => Hash::make($data['password']),
             'role' => $data['role'] ?? 'USUARIO',
             'compania_id' => $data['compania_id'] ?? null,
+            'ciudad' => $data['ciudad'] ?? null,
+            'permisos' => $data['permisos'] ?? [],
         ]);
 
         return $this->authResponse($user);
@@ -51,6 +53,8 @@ class AuthService
                 'email' => $user->email,
                 'role' => $user->role,
                 'compania_id' => $user->compania_id,
+                'ciudad' => $user->ciudad,
+                'permisos' => $user->permisos ?? [],
             ],
         ];
     }

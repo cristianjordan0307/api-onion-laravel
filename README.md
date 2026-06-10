@@ -99,6 +99,12 @@ DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
 SCRIBE_BASE_URL=
+ADMIN_BOGOTA_EMAIL=
+ADMIN_BOGOTA_PASSWORD=
+ADMIN_MEDELLIN_EMAIL=
+ADMIN_MEDELLIN_PASSWORD=
+DEFAULT_ADMIN_PASSWORD=
+DEFAULT_USER_PASSWORD=
 ```
 
 Buenas practicas:
@@ -107,6 +113,7 @@ Buenas practicas:
 - No subas archivos `.env`.
 - En produccion, define `APP_URL` y `SCRIBE_BASE_URL` con la URL publica de la API.
 - Usa credenciales diferentes para desarrollo, pruebas y produccion.
+- Define las contrasenas de usuarios seed mediante variables de entorno; si no se definen, el seeder genera contrasenas aleatorias.
 
 ## Documentacion API
 
@@ -197,6 +204,27 @@ Respuesta:
 | Actualizar o eliminar empleados | `ADMIN` o usuario propietario segun policy |
 
 La policy `EmpleadoPolicy` permite que un usuario de rol `USUARIO` modifique empleados solo si pertenecen a su misma compania.
+
+Ademas del rol, el JWT incluye claims de ciudad y permisos:
+
+```json
+{
+  "rol": "ADMIN",
+  "ciudad": "Bogota",
+  "permisos": [
+    "companias:leer",
+    "companias:crear",
+    "companias:actualizar"
+  ]
+}
+```
+
+Administradores regionales del seeder:
+
+| Usuario | Rol | Claim ciudad | Permisos |
+|---|---|---|---|
+| Admin Bogota | ADMIN | Bogota | Puede leer, crear y actualizar; no puede eliminar |
+| Admin Medellin | ADMIN | Medellin | Puede leer, crear y eliminar; no puede actualizar con PUT/PATCH |
 
 ## Endpoints principales
 

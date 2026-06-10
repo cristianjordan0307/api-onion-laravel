@@ -4,6 +4,51 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: api/openapi.yaml
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {TOKEN_JWT}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: ''
+        headers:
+          content-type: application/yaml
+          cache-control: public
+          accept-ranges: bytes
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: api/auth/registro
     metadata:
@@ -82,12 +127,38 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
+      ciudad:
+        custom: []
+        name: ciudad
+        description: 'Must not be greater than 80 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      permisos:
+        custom: []
+        name: permisos
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example:
+          - g
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
       name: b
       email: zbailey@example.net
       password: '-0pBNvYgxw'
       role: USUARIO
       compania_id: 16
+      ciudad: 'n'
+      permisos:
+        - g
     fileParameters: []
     responses: []
     responseFields: []

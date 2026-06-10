@@ -20,6 +20,22 @@ security:
   -
     default: []
 paths:
+  /api/openapi.yaml:
+    get:
+      summary: ''
+      operationId: getApiOpenapiYaml
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Endpoints
   /api/auth/registro:
     post:
       summary: ''
@@ -60,6 +76,18 @@ paths:
                   description: 'The <code>id</code> of an existing record in the companias table.'
                   example: 16
                   nullable: true
+                ciudad:
+                  type: string
+                  description: 'Must not be greater than 80 characters.'
+                  example: 'n'
+                  nullable: true
+                permisos:
+                  type: array
+                  description: 'Must not be greater than 100 characters.'
+                  example:
+                    - g
+                  items:
+                    type: string
               required:
                 - name
                 - email
